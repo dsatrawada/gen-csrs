@@ -1,0 +1,186 @@
+<!DOCTYPE spec SYSTEM "csr_schema.xsd">
+<REGISTERS>
+   <DEFAULTS
+      PRI="HOST" 
+      CLOCK="PCLK" 
+      APB_ADDR_W="16" 
+      BASE="0x21000" 
+      PREFIX_CSRS=""
+      PREFIX_PKTS="I2C_"
+      MODULE="csrs"
+      MMIO_EXT_ADDR_W="8"
+      GEN_MMIO="1" 
+      APB_V3="1" 
+   />
+   <REG_ARRAY>
+      <REG NAME="Int" OFFS="0x08" MMIO="0" DOC="Interrupt Register">
+        <FIELD NAME="RespQ_NotEmpty"   BIT_RANGE="0" HOST_ATTR="RW1C" PE_ATTR="RW" IO_ATTR="out" RESET="1"
+         DOC="Interrupt due to Response Queue not empty condition"/>
+        <FIELD NAME="RespQ_Full"       BIT_RANGE="1" HOST_ATTR="RW1C" PE_ATTR="RW" IO_ATTR="out" RESET="0"
+         DOC="Interrupt due to Response Queue full condition"/>
+        <FIELD NAME="CmdQ_Empty"       BIT_RANGE="2" HOST_ATTR="RW1C" PE_ATTR="RW" IO_ATTR="out" RESET="0"
+         DOC="Interrupt due to Command Queue empty condition"/>
+        <FIELD NAME="res"              BIT_RANGE="31:3" HOST_ATTR="RC" PE_ATTR="R" RESET="0"
+         DOC="reserved"/>
+      </REG>
+      <REG NAME="IntEnable" DOC="Interrupt Enable Register">
+        <FIELD NAME="RespQ_NotEmpty"   BIT_RANGE="0" HOST_ATTR="RW"   PE_ATTR="R" IO_ATTR="internal" RESET="0"
+         DOC="Interrupt Enable due to Response Queue not empty condition"/>
+        <FIELD NAME="RespQ_Full"       BIT_RANGE="1" HOST_ATTR="RW"   PE_ATTR="R" IO_ATTR="internal" RESET="0"
+         DOC="Interrupt Enable due to Response Queue full condition"/>
+        <FIELD NAME="CmdQ_Empty"       BIT_RANGE="2" HOST_ATTR="RW"   PE_ATTR="R" IO_ATTR="internal" RESET="0"
+         DOC="Interrupt Enable for Command Queue empty condition"/>
+        <FIELD NAME="res"              BIT_RANGE="31:3" HOST_ATTR="RC" PE_ATTR="R" RESET="0"
+         DOC="reserved"/>
+      </REG>
+      <REG NAME="Status" DOC="Status Register">
+        <FIELD NAME="RespQ_NotEmpty" BIT_RANGE="0"     HOST_ATTR="R"  PE_ATTR="RW" IO_ATTR="internal" RESET="0"
+         DOC="If set, Indicates the Response Queue is not empty"/>
+        <FIELD NAME="RespQ_Full"     BIT_RANGE="1"     HOST_ATTR="R"  PE_ATTR="RW" IO_ATTR="internal" RESET="0"
+         DOC="If set, Indicates the Response Queue is full"/>
+        <FIELD NAME="CmdQ_NotEmpty"  BIT_RANGE="2"     HOST_ATTR="R"  PE_ATTR="RW" IO_ATTR="internal" RESET="0"
+         DOC="If set, Indicates the Command Queue is not empty"/>
+        <FIELD NAME="CmdQ_Full"      BIT_RANGE="3"     HOST_ATTR="R"  PE_ATTR="RW" IO_ATTR="internal" RESET="0"
+         DOC="If set, Indicates the Command Queue is full"/>
+        <FIELD NAME="res"            BIT_RANGE="30:4"  HOST_ATTR="RC" CONST="0" PE_ATTR="R" RESET="0"
+         DOC="reserved"/>
+        <FIELD NAME="ErrorFlag"      BIT_RANGE="31"    HOST_ATTR="RW1C"  PE_ATTR="RW" IO_ATTR="internal" RESET="0"
+         DOC="Indicates any prior operation contained an error. The bit remains high until cleared. Write 1 to clear"/>
+<!--
+        <FIELD NAME="CmdQ_AlmostEmpty"   BIT_RANGE="2"     HOST_ATTR="R"  PE_ATTR="R" IO_ATTR="in" RESET="0"
+         DOC="If set, Indicates that the command queue is almost empty"/>
+        <FIELD NAME="RespQ_EntriesAvail" BIT_RANGE="15:8"  HOST_ATTR="R"  PE_ATTR="R" IO_ATTR="in" RESET="0"
+         DOC="Indicates how many entries can be popped from the response queue"/>
+        <FIELD NAME="CmdQ_SpaceAvail"    BIT_RANGE="23:16" HOST_ATTR="R"  PE_ATTR="R" IO_ATTR="in" RESET="0"
+         DOC="Indicates how many entries can be added to the command queue without overflowing it"/>
+        <FIELD NAME="res"                BIT_RANGE="30:24" HOST_ATTR="RC" CONST="0"  PE_ATTR="R" RESET="0"
+         DOC="reserved"/>
+-->
+      </REG>
+      <REG NAME="Conf" DOC="Configuration Register">
+        <FIELD NAME="NumRetriesBeforeError" BIT_RANGE="3:0"   HOST_ATTR="RW" PE_ATTR="R" RESET="0"
+         DOC="Sets the number of silent retries the I2C master will do on a nack'ed command before reporting error"/>
+        <FIELD NAME="CmdQ_AlmostEmptyLevel" BIT_RANGE="15:8"  HOST_ATTR="RW" PE_ATTR="R" RESET="2"
+         DOC="Sets the threshold for command queue level at which almost empty condition will trigger"/>
+        <FIELD NAME="RespQ_AlmostFullLevel" BIT_RANGE="23:16" HOST_ATTR="RW" PE_ATTR="R" RESET="2"
+         DOC="Number of remaining entries in Response queue at which almost full condition will trigger"/>
+        <FIELD NAME="HalfBitDelay"          BIT_RANGE="31:24" HOST_ATTR="RW" PE_ATTR="R" RESET="100"
+         DOC="I2C speed. Control bit time duration in core clock cycles (details TBD)"/>
+      </REG>
+      <REG NAME="InFifo0" DOC="InFifo0 Status Register" DOC_ATTR="private">
+        <FIELD NAME="NotEmpty"     BIT_RANGE="0"     HOST_ATTR="R"  PE_ATTR="R" IO_ATTR="in" RESET="0"
+         DOC="If set, Indicates the Response Queue is Not empty"/>
+        <FIELD NAME="Full"         BIT_RANGE="1"     HOST_ATTR="RW1C"  PE_ATTR="R" IO_ATTR="lintr" RESET="0"
+         DOC="If set, Indicates the Response Queue is Full"/>
+      </REG>
+      <REG NAME="OutFifo0" DOC="OutFifo0 Status Register">
+        <FIELD NAME="NotEmpty"     BIT_RANGE="0"     HOST_ATTR="R"  PE_ATTR="R" IO_ATTR="in" RESET="0"
+         DOC="If set, Indicates the Response Queue is not empty"/>
+        <FIELD NAME="Full"         BIT_RANGE="1"     HOST_ATTR="R"  PE_ATTR="R" IO_ATTR="in" RESET="0"
+         DOC="If set, Indicates the Response Queue is Full"/>
+      </REG>
+      <REG NAME="SdaOeN" DOC="Sda OE_N control. For PE local access" DOC_ATTR="private">
+        <FIELD NAME="val" BIT_RANGE="0" HOST_ATTR="H" PE_ATTR="W" IO_ATTR="out" RESET="0"
+         DOC="Set to 0 to drive a 0 to the I2C bust. Set to 1 to disable ouput and leave it as pulled-up input"/>
+        <FIELD NAME="res" BIT_RANGE="31:1" HOST_ATTR="H" PE_ATTR="R" RESET="0"
+         DOC="reserved"/>
+      </REG>
+      <REG NAME="SclOeN" DOC="Scl OE_N control. For PE local access" DOC_ATTR="private">
+        <FIELD NAME="val" BIT_RANGE="0" HOST_ATTR="H" PE_ATTR="W" IO_ATTR="out" RESET="0"
+         DOC="Set to 0 to drive a 0 to the I2C bust. Set to 1 to disable ouput and leave it as pulled-up input"/>
+        <FIELD NAME="res" BIT_RANGE="31:1" HOST_ATTR="H" PE_ATTR="R" RESET="0"
+         DOC="reserved"/>
+      </REG>
+      <REG NAME="SdaIn" DOC="SclIn input. For PE local access" DOC_ATTR="private">
+        <FIELD NAME="val" BIT_RANGE="0" HOST_ATTR="H" PE_ATTR="R" IO_ATTR="in" RESET="0"
+         DOC="Read value of the I2C SDA line"/>
+        <FIELD NAME="res" BIT_RANGE="31:1" HOST_ATTR="H" PE_ATTR="R" RESET="0"
+         DOC="reserved"/>
+      </REG>
+      <REG NAME="SclIn" DOC="SclIn input. For PE local access" DOC_ATTR="private">
+        <FIELD NAME="val" BIT_RANGE="0" HOST_ATTR="H" PE_ATTR="R" IO_ATTR="in" RESET="0"
+         DOC="Read value of the I2C SCL line"/>
+        <FIELD NAME="res" BIT_RANGE="31:1" HOST_ATTR="H" PE_ATTR="R" RESET="0"
+         DOC="reserved"/>
+      </REG>
+      <REG NAME="scratch_pad_a" DOC="scratch pad a register n" COUNT="10" INCR="8">
+        <FIELD NAME="val" BIT_RANGE="31:0" HOST_ATTR="RW" RESET="0"
+         DOC="value"/>
+      </REG>
+      <REG NAME="scratch_pad_b" DOC="scratch pad b register n" COUNT="10" INCR="8">
+        <FIELD NAME="val" BIT_RANGE="31:0" HOST_ATTR="RW" RESET="0"
+         DOC="value"/>
+      </REG>
+      <REG NAME="scratch_pad_c" DOC="scratch pad c register n" IDX0="4" COUNT="2" INCR="4">
+        <FIELD NAME="val" BIT_RANGE="31:0" HOST_ATTR="RW" RESET="0" IO_ATTR="out" TRIGGER_ATTR="W"
+         DOC="value"/>
+      </REG>
+      <REG NAME="scratch_pad_d" DOC="scratch pad d register n" COUNT="16">
+        <FIELD NAME="val" BIT_RANGE="31:0" HOST_ATTR="RW" RESET="0" IO_ATTR="out" TRIGGER_ATTR="W"
+         DOC="value"/>
+      </REG>
+   </REG_ARRAY>
+   <PKT_ARRAY>
+      <PKT NAME="Write" DOC="Write N-bytes from a specific address COMMAND format">
+         <FIELD NAME="N" BIT_RANGE="7:0" DOC="Number of bytes to write (0 is interpreted as 256)"/>
+         <FIELD NAME="waddr" BIT_RANGE="15:8" DOC="Starting address to write"/>
+         <FIELD NAME="slave_addr" BIT_RANGE="25:16" DOC="Slave device Address. If 7-bit addressing, LSB aligned"/>
+         <FIELD NAME="use_10b_addressing" BIT_RANGE="26" DOC="1:Use 10-bit I2C addressing, 0:Use 7-bit I2C addressing"/>
+         <FIELD NAME="rr" BIT_RANGE="27" 
+          DOC="Response Request. If set the I2C master will send a response after this command is complete. See WriteResp packet"/>
+         <FIELD NAME="cmd" BIT_RANGE="31:28" DOC="Set to 0 for this command"/>
+      </PKT>
+      <PKT NAME="Read" DOC="Read N-bytes from a specific address COMMAND format">
+         <FIELD NAME="N" BIT_RANGE="7:0" DOC="Number of bytes to read (0 is interpreted as 256)"/>
+         <FIELD NAME="raddr" BIT_RANGE="15:8" DOC="Starting address to read"/>
+         <FIELD NAME="slave_addr" BIT_RANGE="25:16" DOC="Slave device Address. If 7-bit addressing, LSB aligned"/>
+         <FIELD NAME="use_10b_addressing" BIT_RANGE="26" DOC="1:Use 10-bit I2C addressing, 0:Use 7-bit I2C addressing"/>
+         <FIELD NAME="res" BIT_RANGE="27" DOC="reserved"/>
+         <FIELD NAME="cmd" BIT_RANGE="31:28" DOC="Set to 1 for this command"/>
+      </PKT>
+      <PKT NAME="WriteOne" DOC="Compact Write One byte COMMAND format">
+         <FIELD NAME="wdata" BIT_RANGE="7:0" DOC="Data Byte to write"/>
+         <FIELD NAME="waddr" BIT_RANGE="15:8" DOC="Address to write"/>
+         <FIELD NAME="slave_addr" BIT_RANGE="25:16" DOC="Slave device Address. If 7-bit addressing, LSB aligned"/>
+         <FIELD NAME="use_10b_addressing" BIT_RANGE="26" DOC="1:Use 10-bit I2C addressing, 0:Use 7-bit I2C addressing"/>
+         <FIELD NAME="rr" BIT_RANGE="27" 
+          DOC="Response Request. If set the I2C master will send a response after this command is complete. See WriteResp"/>
+         <FIELD NAME="cmd" BIT_RANGE="31:28" DOC="Set to 2 for this command"/>
+      </PKT>
+      <PKT NAME="ReadCurrent" DOC="Read N-bytes from a current address COMMAND format">
+         <FIELD NAME="N" BIT_RANGE="7:0" DOC="Number of bytes to read (0 is interpreted as 256)"/>
+         <FIELD NAME="res1" BIT_RANGE="15:8" DOC="reserved"/>
+         <FIELD NAME="slave_addr" BIT_RANGE="25:16" DOC="Slave device Address. If 7-bit addressing, LSB aligned"/>
+         <FIELD NAME="use_10b_addressing" BIT_RANGE="26" DOC="1:Use 10-bit I2C addressing, 0:Use 7-bit I2C addressing"/>
+         <FIELD NAME="res2" BIT_RANGE="27" DOC="reserved"/>
+         <FIELD NAME="cmd" BIT_RANGE="31:28" DOC="Set to 3 for this command"/>
+      </PKT>
+      <PKT NAME="WritePayload" DOC="Write command. Format for subsequent words">
+         <FIELD NAME="wdata" BIT_RANGE="7:0"  DOC="Data to write"/>
+         <FIELD NAME="res"   BIT_RANGE="31:8" DOC="Reserved"/>
+      </PKT>
+      <PKT NAME="WriteResp" DOC="Response to Write/WriteOne commands format">
+         <FIELD NAME="res" BIT_RANGE="7:0" DOC="Reserved"/>
+         <FIELD NAME="Error" BIT_RANGE="8" DOC="Copy of Status.ErrorFlag"/>
+         <FIELD NAME="cmd" BIT_RANGE="31:28" DOC="0/2 for Write/WriteOne responses"/>
+      </PKT>
+      <PKT NAME="ReadResp" DOC="Response to Read/ReadCurrent command format">
+         <FIELD NAME="rdata" BIT_RANGE="7:0" DOC="Read data byte from I2C bus"/>
+         <FIELD NAME="Error" BIT_RANGE="8" DOC="If set indicates read transaction was aborted due to an error"/>
+         <FIELD NAME="cmd" BIT_RANGE="31:28" DOC="1/3 for Read/ReadCurrent responses"/>
+      </PKT>
+      <PKT NAME="LLWrite" DOC="Low level Write command COMMAND format. For internal use only">
+         <FIELD NAME="wdata" BIT_RANGE="7:0" DOC="Data Byte to write"/>
+         <FIELD NAME="stop" BIT_RANGE="8" DOC="Set to 1 if the write should be followed by a stop condition"/>
+         <FIELD NAME="start" BIT_RANGE="9" DOC="Set to 1 if the write should be preceded by a start condition"/>
+         <FIELD NAME="rr" BIT_RANGE="12" 
+          DOC="Response Request. If set the I2C master will send a response after this command is complete. See WriteResp packet"/>
+         <FIELD NAME="cmd" BIT_RANGE="31:28" DOC="Set to 4 for this command"/>
+      </PKT>
+      <PKT NAME="LLRead" DOC="Low level Read COMMAND format. For internal use only">
+         <FIELD NAME="stop" BIT_RANGE="8" DOC="Set to 1 if the read should be followed by a stop condition"/>
+         <FIELD NAME="nack" BIT_RANGE="9" DOC="Set to 1 if the read should be nacked by the master"/>
+         <FIELD NAME="cmd" BIT_RANGE="31:28" DOC="Set to 5 for this command"/>
+      </PKT>
+   </PKT_ARRAY>
+</REGISTERS>

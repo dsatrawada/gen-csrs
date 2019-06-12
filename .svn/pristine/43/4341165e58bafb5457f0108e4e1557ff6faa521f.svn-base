@@ -1,0 +1,252 @@
+block PMU {
+bytes 4;
+register I2C_core_clock	@'h0 	{
+		bytes 4;
+		doc {I2C core clock }
+	field ACG_val_I2C @16 {
+		bits 16;
+		access rw;
+		reset  'h5;
+		}
+	field Reserved @4 {
+		bits 4;
+		access rw;
+		reset  'h0;
+		}
+	field DIV_OSC_I2C @4 {
+		bits 4;
+		access rw;
+		reset  'h14;
+		}
+	field DIV_PLL_Extclk_I2C1 @4 {
+		bits 4;
+		access rw;
+		reset  'h1;
+		}
+	field Reserved @1 {
+		bits 1;
+		access rw;
+		reset  'h0;
+		}
+	field OSC_PLL_clk_sel_I2C @1 {
+		bits 1;
+		access rw;
+		reset  'h1;
+		}
+	field RTC_clk_select_I2C1 @1 {
+		bits 1;
+		access rw;
+		reset  'h1;
+		}
+	field ACG_Dis_I2C @1 {
+		bits 1;
+		access rw;
+		reset  'h0;
+		}
+			}
+register SPI_core_clock	@'h4 	{
+		bytes 4;
+		doc {SPI core clock }
+	field ACG_val_SPI @16 {
+		bits 16;
+		access rw;
+		reset  'h5;
+		}
+	field Reserved @4 {
+		bits 4;
+		access rw;
+		reset  'h0;
+		}
+	field DIV_OSC_SPI @4 {
+		bits 4;
+		access rw;
+		reset  'h1;
+		}
+	field DIV_PLL_Extclk_SPI @4 {
+		bits 4;
+		access rw;
+		reset  'h1;
+		}
+	field Reserved @1 {
+		bits 1;
+		access rw;
+		reset  'h0;
+		}
+	field OSC_PLL_clk_sel_SPI @1 {
+		bits 1;
+		access rw;
+		reset  'h1;
+		}
+	field Reserved @1 {
+		bits 1;
+		access rw;
+		reset  'h0;
+		}
+	field ACG_Dis_SPI @1 {
+		bits 1;
+		access rw;
+		reset  'h0;
+		}
+			}
+register I2S_core_clock	@'h8 	{
+		bytes 4;
+		doc {I2S core clock }
+	field ACG_val_I2S @16 {
+		bits 16;
+		access rw;
+		reset  'h5;
+		}
+	field Reserved @4 {
+		bits 4;
+		access rw;
+		reset  'h0;
+		}
+	field DIV_OSC_I2S @4 {
+		bits 4;
+		access rw;
+		reset  'h1;
+		}
+	field Reserved @7 {
+		bits 7;
+		access rw;
+		reset  'h0;
+		}
+	field ACG_Dis_I2S @1 {
+		bits 1;
+		access rw;
+		reset  'h0;
+		}
+			}
+register SS_BASE_CLK	@'h10 	{
+		bytes 4;
+		doc {SS base clock }
+	field ACG_val_SS @16 {
+		bits 16;
+		access rw;
+		reset  'h5;
+		}
+	field Reserved @4 {
+		bits 4;
+		access rw;
+		reset  'h0;
+		}
+	field DIV_OSC_SS @4 {
+		bits 4;
+		access rw;
+		reset  'h1;
+		}
+	field DIV_PLL_Extclk_SS @4 {
+		bits 4;
+		access rw;
+		reset  'h1;
+		}
+	field Reserved @1 {
+		bits 1;
+		access rw;
+		reset  'h0;
+		}
+	field OSC_PLL_clk_sel_SS @1 {
+		bits 1;
+		access rw;
+		reset  'h1;
+		}
+	field RTC_clk_select_SS @1 {
+		bits 1;
+		access rw;
+		reset  'h1;
+		}
+	field ACG_Dis_SS @1 {
+		bits 1;
+		access rw;
+		reset  'h0;
+		}
+			}
+register UART_core_clock	@'h14 	{
+		bytes 4;
+		doc {UART core clock }
+	field ACG_val_UART @16 {
+		bits 16;
+		access rw;
+		reset  'h5;
+		}
+	field Reserved @4 {
+		bits 4;
+		access rw;
+		reset  'h0;
+		}
+	field DIV_OSC_UART @4 {
+		bits 4;
+		access rw;
+		reset  'h1;
+		}
+	field DIV_PLL_Extclk_UART @4 {
+		bits 4;
+		access rw;
+		reset  'h1;
+		}
+	field Reserved @1 {
+		bits 1;
+		access rw;
+		reset  'h0;
+		}
+	field OSC_PLL_clk_sel_UART @1 {
+		bits 1;
+		access rw;
+		reset  'h1;
+		}
+	field Reserved @1 {
+		bits 1;
+		access rw;
+		reset  'h0;
+		}
+	field ACG_Dis_UART @1 {
+		bits 1;
+		access rw;
+		reset  'h0;
+		}
+			}
+register EMMC_core_clock	@'h18 	{
+		bytes 4;
+		doc {EMMC core clock }
+	field ACG_val_EMMC @16 {
+		bits 16;
+		access rw;
+		reset  'h5;
+		}
+	field Reserved @4 {
+		bits 4;
+		access rw;
+		reset  'h0;
+		}
+	field DIV_OSC_EMMC @4 {
+		bits 4;
+		access rw;
+		reset  'h1;
+		}
+	field DIV_PLL_Extclk_EMMC @4 {
+		bits 4;
+		access rw;
+		reset  'h1;
+		}
+	field Reserved @1 {
+		bits 1;
+		access rw;
+		reset  'h0;
+		}
+	field OSC_PLL_clk_sel_EMMC @1 {
+		bits 1;
+		access rw;
+		reset  'h1;
+		}
+	field Reserved @1 {
+		bits 1;
+		access rw;
+		reset  'h0;
+		}
+	field ACG_Dis_EMMC @1 {
+		bits 1;
+		access rw;
+		reset  'h0;
+		}
+	}
+}

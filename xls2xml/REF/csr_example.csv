@@ -1,0 +1,33 @@
+Name,,,,,Address,Description
+MOD1_CONFIG,,,,," 0x0","MOD1 Configuration Register"
+"Bits ","Field Name","Access Type","Clock Domain","Reset Domain",Default,Description
+31:17,RESERVED,RV,,,0x0,Reserved
+16:16,RESET,RW,,,0x0,"Asynchronous reset of internal buffers and registers"
+15:9,RESERVED,RV,,,0x0,Reserved
+8:8,CLK_EN,RW,,,0x0,"Cenable HIP Clock"
+7:1,RESERVED,RV,,,0x0,Reserved
+0:0,ENMOD1,RW,,,0x0,"Enable MOD1
+0 - MOD1 in power-down/stand-by mode
+1 - Normal operation"
+,,,,,,
+Name,,,,,Address,Description
+MOD1_CAPTURE_CONTROL,,,,," 0x4","MOD1 Capture Control Register"
+"Bits ","Field Name","Access Type","Clock Domain","Reset Domain",Default,Description
+31:18,RESERVED,RV,,,0x0,Reserved
+17:16,SELRES,RW,,,0x0,"Selects the MOD1 resolutions
+00 - 6-bit
+01 - 8-bit
+10 - 10-bit
+11 - 12-bit"
+15:9,RESERVED,RV,,,0x0,Reserved
+8:8,SEL,RW,,,0x0,"Select MOD1 Input - Selects between Channel 0 and Channel 1
+0 - Selects Channel 0
+1 - Selects Channel 1"
+7:1,RESERVED,RV,,,0x0,Reserved
+0:0,SOC,WO,,,0x0,"Start-of-conversion(SOC) - Setting this bit starts the conversion cycle."
+,,,,,,
+Name,,,,,Address,Description
+MOD1_CAPTURE_DATA,,,,," 0x8","MOD1 Capture Data Register"
+"Bits ","Field Name","Access Type","Clock Domain","Reset Domain",Default,Description
+31:12,RESERVED,RV,,,0x0,Reserved
+11:0,MOD1_DATA,RO,,,0x0,"Data - Data output from MOD1"

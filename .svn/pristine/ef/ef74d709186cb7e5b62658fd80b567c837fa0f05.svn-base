@@ -1,0 +1,232 @@
+// file automatically generated - do not edit
+
+`include "lib_udp.rdl"
+
+addrmap map_PMU {
+
+  desc = "PMU";
+  Space = "PMU";
+
+  reg reg_I2C_core_clock_type {
+    desc = "I2C core clock ";
+    regwidth  = 32;
+
+    field {
+        desc = "";
+        AccessType = "rw";
+    } ACG_val_I2C [31:16] = 16'h5;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved0 [7:4] = 4'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } DIV_OSC_I2C [7:4] = 4'h14;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } DIV_PLL_Extclk_I2C1 [7:4] = 4'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved1 [1:1] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } OSC_PLL_clk_sel_I2C [1:1] = 1'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } RTC_clk_select_I2C1 [1:1] = 1'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } ACG_Dis_I2C [1:1] = 1'h0;
+  }; // end register I2C_core_clock
+
+  reg reg_SPI_core_clock_type {
+    desc = "SPI core clock ";
+    regwidth  = 32;
+
+    field {
+        desc = "";
+        AccessType = "rw";
+    } ACG_val_SPI [31:16] = 16'h5;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved0 [7:4] = 4'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } DIV_OSC_SPI [7:4] = 4'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } DIV_PLL_Extclk_SPI [7:4] = 4'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved1 [1:1] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } OSC_PLL_clk_sel_SPI [1:1] = 1'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved2 [1:1] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } ACG_Dis_SPI [1:1] = 1'h0;
+  }; // end register SPI_core_clock
+
+  reg reg_I2S_core_clock_type {
+    desc = "I2S core clock ";
+    regwidth  = 32;
+
+    field {
+        desc = "";
+        AccessType = "rw";
+    } ACG_val_I2S [31:16] = 16'h5;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved0 [7:4] = 4'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } DIV_OSC_I2S [7:4] = 4'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved1 [13:7] = 7'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } ACG_Dis_I2S [1:1] = 1'h0;
+  }; // end register I2S_core_clock
+
+  reg reg_SS_BASE_CLK_type {
+    desc = "SS base clock ";
+    regwidth  = 32;
+
+    field {
+        desc = "";
+        AccessType = "rw";
+    } ACG_val_SS [31:16] = 16'h5;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved0 [7:4] = 4'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } DIV_OSC_SS [7:4] = 4'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } DIV_PLL_Extclk_SS [7:4] = 4'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved1 [1:1] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } OSC_PLL_clk_sel_SS [1:1] = 1'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } RTC_clk_select_SS [1:1] = 1'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } ACG_Dis_SS [1:1] = 1'h0;
+  }; // end register SS_BASE_CLK
+
+  reg reg_UART_core_clock_type {
+    desc = "UART core clock ";
+    regwidth  = 32;
+
+    field {
+        desc = "";
+        AccessType = "rw";
+    } ACG_val_UART [31:16] = 16'h5;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved0 [7:4] = 4'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } DIV_OSC_UART [7:4] = 4'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } DIV_PLL_Extclk_UART [7:4] = 4'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved1 [1:1] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } OSC_PLL_clk_sel_UART [1:1] = 1'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved2 [1:1] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } ACG_Dis_UART [1:1] = 1'h0;
+  }; // end register UART_core_clock
+
+  reg reg_EMMC_core_clock_type {
+    desc = "EMMC core clock ";
+    regwidth  = 32;
+
+    field {
+        desc = "";
+        AccessType = "rw";
+    } ACG_val_EMMC [31:16] = 16'h5;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved0 [7:4] = 4'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } DIV_OSC_EMMC [7:4] = 4'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } DIV_PLL_Extclk_EMMC [7:4] = 4'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved1 [1:1] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } OSC_PLL_clk_sel_EMMC [1:1] = 1'h1;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } Reserved2 [1:1] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } ACG_Dis_EMMC [1:1] = 1'h0;
+  }; // end register EMMC_core_clock
+
+  reg_I2C_core_clock_type I2C_core_clock@0x0;
+  reg_SPI_core_clock_type SPI_core_clock@0x4;
+  reg_I2S_core_clock_type I2S_core_clock@0x8;
+  reg_SS_BASE_CLK_type SS_BASE_CLK@0x10;
+  reg_UART_core_clock_type UART_core_clock@0x14;
+  reg_EMMC_core_clock_type EMMC_core_clock@0x18;
+};

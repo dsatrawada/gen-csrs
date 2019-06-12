@@ -1,0 +1,399 @@
+block mycsrs {
+  bytes 4;
+  register int @'h8402 {
+    field respq_notempty @'h0 {
+      bits 1;
+      access w1c;
+      reset 'h1;
+    }
+    field respq_full @'h1 {
+      bits 1;
+      access w1c;
+      reset 'h0;
+    }
+    field cmdq_empty @'h2 {
+      bits 1;
+      access w1c;
+      reset 'h0;
+    }
+    field res @'h3 {
+      bits 29;
+      access ro;
+      reset 'h0;
+    }
+  }
+  register intenable @'h8403 {
+    field respq_notempty @'h0 {
+      bits 1;
+      access rw;
+      reset 'h0;
+    }
+    field respq_full @'h1 {
+      bits 1;
+      access rw;
+      reset 'h0;
+    }
+    field cmdq_empty @'h2 {
+      bits 1;
+      access rw;
+      reset 'h0;
+    }
+    field res @'h3 {
+      bits 29;
+      access ro;
+      reset 'h0;
+    }
+  }
+  register status @'h8404 {
+    field respq_notempty @'h0 {
+      bits 1;
+      access ro;
+      reset 'h0;
+    }
+    field respq_full @'h1 {
+      bits 1;
+      access ro;
+      reset 'h0;
+    }
+    field cmdq_notempty @'h2 {
+      bits 1;
+      access ro;
+      reset 'h0;
+    }
+    field cmdq_full @'h3 {
+      bits 1;
+      access ro;
+      reset 'h0;
+    }
+    field res @'h4 {
+      bits 27;
+      access ro;
+      reset 'h0;
+    }
+    field errorflag @'h1f {
+      bits 1;
+      access w1c;
+      reset 'h0;
+    }
+  }
+  register conf @'h8405 {
+    field numretriesbeforeerror @'h0 {
+      bits 4;
+      access rw;
+      reset 'h0;
+    }
+    field cmdq_almostemptylevel @'h8 {
+      bits 8;
+      access rw;
+      reset 'h2;
+    }
+    field respq_almostfulllevel @'h10 {
+      bits 8;
+      access rw;
+      reset 'h2;
+    }
+    field halfbitdelay @'h18 {
+      bits 8;
+      access rw;
+      reset 'h64;
+    }
+  }
+  register infifo0 @'h8406 {
+    field notempty @'h0 {
+      bits 1;
+      access ro;
+      reset 'h0;
+    }
+    field full @'h1 {
+      bits 1;
+      access w1c;
+      reset 'h0;
+    }
+  }
+  register outfifo0 @'h8407 {
+    field notempty @'h0 {
+      bits 1;
+      access ro;
+      reset 'h0;
+    }
+    field full @'h1 {
+      bits 1;
+      access ro;
+      reset 'h0;
+    }
+  }
+  register sdaoen @'h8408 {
+  }
+  register scloen @'h8409 {
+  }
+  register sdain @'h840a {
+  }
+  register sclin @'h840b {
+  }
+  register scratch_pad_a_0 @'h840c {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_a_1 @'h840e {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_a_2 @'h8410 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_a_3 @'h8412 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_a_4 @'h8414 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_a_5 @'h8416 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_a_6 @'h8418 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_a_7 @'h841a {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_a_8 @'h841c {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_a_9 @'h841e {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_b_0 @'h840d {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_b_1 @'h840f {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_b_2 @'h8411 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_b_3 @'h8413 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_b_4 @'h8415 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_b_5 @'h8417 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_b_6 @'h8419 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_b_7 @'h841b {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_b_8 @'h841d {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_b_9 @'h841f {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_c_4 @'h8420 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_c_5 @'h8421 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_0 @'h8422 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_1 @'h8423 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_2 @'h8424 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_3 @'h8425 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_4 @'h8426 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_5 @'h8427 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_6 @'h8428 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_7 @'h8429 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_8 @'h842a {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_9 @'h842b {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_10 @'h842c {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_11 @'h842d {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_12 @'h842e {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_13 @'h842f {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_14 @'h8430 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+  register scratch_pad_d_15 @'h8431 {
+    field val @'h0 {
+      bits 32;
+      access rw;
+      reset 'h0;
+    }
+  }
+}

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:attribute name="HOST_ATTR">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RW"/>
+      <xs:enumeration value="RW1C"/>
+      <xs:enumeration value="RC"/>
+      <xs:enumeration value="R"/>
+      <xs:enumeration value="H"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:attribute> 
+
+<xs:attribute name="IO_ATTR">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="internal"/>
+      <xs:enumeration value="in"/>
+      <xs:enumeration value="lintr"/>
+      <xs:enumeration value="out"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:attribute> 
+
+<xs:attribute name="TRIGGER_ATTR">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="R"/>
+      <xs:enumeration value="W"/>
+      <xs:enumeration value="RW"/>
+      <xs:enumeration value="NONE"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:attribute> 
+
+
+<xs:attribute name="PE_ATTR">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RW"/>
+      <xs:enumeration value="W"/>
+      <xs:enumeration value="NONE"/>
+      <xs:enumeration value="R"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:attribute> 
+
+<xs:element name="FIELD">
+ <xs:complexType>
+ <xs:attribute name="NAME"      type="xs:string" use="required"/>
+ <xs:attribute name="BIT_RANGE" type="xs:string" use="required" />
+ <xs:attribute ref="HOST_ATTR"  use="optional" />
+ <xs:attribute ref="IO_ATTR"    use="optional" />
+ <xs:attribute ref="TRIGGER_ATTR" use="optional" />
+ <xs:attribute ref="PE_ATTR"    use="optional" />
+ <xs:attribute name="RESET"     type="xs:string" use="optional" />
+ <xs:attribute name="CONST"     type="xs:string" use="optional"/>
+ <xs:attribute name="DOC"       type="xs:string" use="required" />
+ </xs:complexType>
+</xs:element>
+
+
+<xs:element name="REG">
+ <xs:complexType>
+   <xs:sequence>
+     <xs:element ref="FIELD"  maxOccurs="unbounded"/>
+   </xs:sequence>
+
+  <xs:attribute name="NAME"   type="xs:string" use="required"/>
+  <xs:attribute name="DOC_ATTR" type="xs:string" use="optional"/>
+  <xs:attribute name="OFFS"   type="xs:string" use="optional"/>
+  <xs:attribute name="MMIO"   type="xs:string" use="optional"/>
+  <xs:attribute name="DOC"    type="xs:string" use="required"/>
+  <xs:attribute name="DOCEXT" type="xs:string" use="optional"/> 
+  <xs:attribute name="COUNT"  type="xs:string" use="optional"/> 
+  <xs:attribute name="INCR"   type="xs:string" use="optional"/> 
+  <xs:attribute name="IDX0"   type="xs:string" use="optional"/> 
+ </xs:complexType>
+</xs:element>
+
+
+<xs:element name="PKT">
+ <xs:complexType>
+   <xs:sequence>
+     <xs:element ref="FIELD"  maxOccurs="unbounded"/>
+   </xs:sequence>
+
+  <xs:attribute name="NAME"   type="xs:string" use="required"/>
+  <xs:attribute name="DOC_ATTR" type="xs:string" use="optional"/>
+  <xs:attribute name="DOC"    type="xs:string" use="required"/>
+  <xs:attribute name="DOCEXT" type="xs:string" use="optional"/> 
+ </xs:complexType>
+</xs:element>
+
+
+<xs:element name="DEFAULTS">
+ <xs:complexType>
+  <xs:attribute name="PRI"   type="xs:string" use="optional"/>
+  <xs:attribute name="CLOCK"   type="xs:string" use="optional"/>
+  <xs:attribute name="APB_ADDR_W"   type="xs:string" use="optional"/>
+  <xs:attribute name="PREFIX_CSRS"    type="xs:string" use="optional"/>
+  <xs:attribute name="PREFIX_PKTS"    type="xs:string" use="optional"/>
+  <xs:attribute name="MODULE"    type="xs:string" use="optional"/>
+  <xs:attribute name="MMIO_EXT_ADDR_W"    type="xs:string" use="optional"/>
+  <xs:attribute name="GEN_MMIO"    type="xs:string" use="optional"/>
+  <xs:attribute name="BASE"    type="xs:string" use="optional"/>
+  <xs:attribute name="APB_V3"    type="xs:string" use="optional"/>
+ </xs:complexType>
+</xs:element>
+
+<xs:element name="REG_ARRAY">
+ <xs:complexType>
+   <xs:sequence>
+     <xs:element ref="REG"   maxOccurs="unbounded"/>
+   </xs:sequence>
+ </xs:complexType>
+</xs:element>
+
+<xs:element name="PKT_ARRAY">
+ <xs:complexType>
+   <xs:sequence>
+     <xs:element ref="PKT"   maxOccurs="unbounded"/>
+   </xs:sequence>
+ </xs:complexType>
+</xs:element>
+
+
+<xs:element name="REGISTERS">
+ <xs:complexType>
+   <xs:sequence>
+     <xs:element ref="DEFAULTS"   maxOccurs="unbounded"/>
+     <xs:element ref="REG_ARRAY"  minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element ref="PKT_ARRAY"  minOccurs="0" maxOccurs="unbounded"/>
+   </xs:sequence>
+ </xs:complexType>
+</xs:element>
+
+
+
+</xs:schema>
+

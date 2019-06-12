@@ -1,0 +1,442 @@
+// file automatically generated - do not edit
+
+`include "lib_udp.rdl"
+
+addrmap map_mycsrs {
+
+  desc = "mycsrs";
+  Space = "mycsrs";
+
+  reg reg_int_type {
+    field {
+        desc = "";
+        AccessType = "w1c";
+    } respq_notempty [0:0x0] = 1'h1;
+    field {
+        desc = "";
+        AccessType = "w1c";
+    } respq_full [1:0x1] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "w1c";
+    } cmdq_empty [2:0x2] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "ro";
+    } res [31:0x3] = 29'h0;
+  }; // end register int
+
+  reg reg_intenable_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } respq_notempty [0:0x0] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } respq_full [1:0x1] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } cmdq_empty [2:0x2] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "ro";
+    } res [31:0x3] = 29'h0;
+  }; // end register intenable
+
+  reg reg_status_type {
+    field {
+        desc = "";
+        AccessType = "ro";
+    } respq_notempty [0:0x0] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "ro";
+    } respq_full [1:0x1] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "ro";
+    } cmdq_notempty [2:0x2] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "ro";
+    } cmdq_full [3:0x3] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "ro";
+    } res [30:0x4] = 27'h0;
+    field {
+        desc = "";
+        AccessType = "w1c";
+    } errorflag [31:0x1f] = 1'h0;
+  }; // end register status
+
+  reg reg_conf_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } numretriesbeforeerror [3:0x0] = 4'h0;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } cmdq_almostemptylevel [15:0x8] = 8'h2;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } respq_almostfulllevel [23:0x10] = 8'h2;
+    field {
+        desc = "";
+        AccessType = "rw";
+    } halfbitdelay [31:0x18] = 8'h64;
+  }; // end register conf
+
+  reg reg_infifo0_type {
+    field {
+        desc = "";
+        AccessType = "ro";
+    } notempty [0:0x0] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "w1c";
+    } full [1:0x1] = 1'h0;
+  }; // end register infifo0
+
+  reg reg_outfifo0_type {
+    field {
+        desc = "";
+        AccessType = "ro";
+    } notempty [0:0x0] = 1'h0;
+    field {
+        desc = "";
+        AccessType = "ro";
+    } full [1:0x1] = 1'h0;
+  }; // end register outfifo0
+
+  reg reg_sdaoen_type {
+  }; // end register sdaoen
+
+  reg reg_scloen_type {
+  }; // end register scloen
+
+  reg reg_sdain_type {
+  }; // end register sdain
+
+  reg reg_sclin_type {
+  }; // end register sclin
+
+  reg reg_scratch_pad_a_0_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_a_0
+
+  reg reg_scratch_pad_a_1_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_a_1
+
+  reg reg_scratch_pad_a_2_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_a_2
+
+  reg reg_scratch_pad_a_3_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_a_3
+
+  reg reg_scratch_pad_a_4_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_a_4
+
+  reg reg_scratch_pad_a_5_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_a_5
+
+  reg reg_scratch_pad_a_6_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_a_6
+
+  reg reg_scratch_pad_a_7_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_a_7
+
+  reg reg_scratch_pad_a_8_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_a_8
+
+  reg reg_scratch_pad_a_9_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_a_9
+
+  reg reg_scratch_pad_b_0_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_b_0
+
+  reg reg_scratch_pad_b_1_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_b_1
+
+  reg reg_scratch_pad_b_2_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_b_2
+
+  reg reg_scratch_pad_b_3_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_b_3
+
+  reg reg_scratch_pad_b_4_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_b_4
+
+  reg reg_scratch_pad_b_5_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_b_5
+
+  reg reg_scratch_pad_b_6_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_b_6
+
+  reg reg_scratch_pad_b_7_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_b_7
+
+  reg reg_scratch_pad_b_8_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_b_8
+
+  reg reg_scratch_pad_b_9_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_b_9
+
+  reg reg_scratch_pad_c_4_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_c_4
+
+  reg reg_scratch_pad_c_5_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_c_5
+
+  reg reg_scratch_pad_d_0_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_0
+
+  reg reg_scratch_pad_d_1_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_1
+
+  reg reg_scratch_pad_d_2_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_2
+
+  reg reg_scratch_pad_d_3_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_3
+
+  reg reg_scratch_pad_d_4_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_4
+
+  reg reg_scratch_pad_d_5_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_5
+
+  reg reg_scratch_pad_d_6_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_6
+
+  reg reg_scratch_pad_d_7_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_7
+
+  reg reg_scratch_pad_d_8_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_8
+
+  reg reg_scratch_pad_d_9_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_9
+
+  reg reg_scratch_pad_d_10_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_10
+
+  reg reg_scratch_pad_d_11_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_11
+
+  reg reg_scratch_pad_d_12_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_12
+
+  reg reg_scratch_pad_d_13_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_13
+
+  reg reg_scratch_pad_d_14_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_14
+
+  reg reg_scratch_pad_d_15_type {
+    field {
+        desc = "";
+        AccessType = "rw";
+    } val [31:0x0] = 32'h0;
+  }; // end register scratch_pad_d_15
+
+  reg_int_type int@0x8402;
+  reg_intenable_type intenable@0x8403;
+  reg_status_type status@0x8404;
+  reg_conf_type conf@0x8405;
+  reg_infifo0_type infifo0@0x8406;
+  reg_outfifo0_type outfifo0@0x8407;
+  reg_sdaoen_type sdaoen@0x8408;
+  reg_scloen_type scloen@0x8409;
+  reg_sdain_type sdain@0x840a;
+  reg_sclin_type sclin@0x840b;
+  reg_scratch_pad_a_0_type scratch_pad_a_0@0x840c;
+  reg_scratch_pad_a_1_type scratch_pad_a_1@0x840e;
+  reg_scratch_pad_a_2_type scratch_pad_a_2@0x8410;
+  reg_scratch_pad_a_3_type scratch_pad_a_3@0x8412;
+  reg_scratch_pad_a_4_type scratch_pad_a_4@0x8414;
+  reg_scratch_pad_a_5_type scratch_pad_a_5@0x8416;
+  reg_scratch_pad_a_6_type scratch_pad_a_6@0x8418;
+  reg_scratch_pad_a_7_type scratch_pad_a_7@0x841a;
+  reg_scratch_pad_a_8_type scratch_pad_a_8@0x841c;
+  reg_scratch_pad_a_9_type scratch_pad_a_9@0x841e;
+  reg_scratch_pad_b_0_type scratch_pad_b_0@0x840d;
+  reg_scratch_pad_b_1_type scratch_pad_b_1@0x840f;
+  reg_scratch_pad_b_2_type scratch_pad_b_2@0x8411;
+  reg_scratch_pad_b_3_type scratch_pad_b_3@0x8413;
+  reg_scratch_pad_b_4_type scratch_pad_b_4@0x8415;
+  reg_scratch_pad_b_5_type scratch_pad_b_5@0x8417;
+  reg_scratch_pad_b_6_type scratch_pad_b_6@0x8419;
+  reg_scratch_pad_b_7_type scratch_pad_b_7@0x841b;
+  reg_scratch_pad_b_8_type scratch_pad_b_8@0x841d;
+  reg_scratch_pad_b_9_type scratch_pad_b_9@0x841f;
+  reg_scratch_pad_c_4_type scratch_pad_c_4@0x8420;
+  reg_scratch_pad_c_5_type scratch_pad_c_5@0x8421;
+  reg_scratch_pad_d_0_type scratch_pad_d_0@0x8422;
+  reg_scratch_pad_d_1_type scratch_pad_d_1@0x8423;
+  reg_scratch_pad_d_2_type scratch_pad_d_2@0x8424;
+  reg_scratch_pad_d_3_type scratch_pad_d_3@0x8425;
+  reg_scratch_pad_d_4_type scratch_pad_d_4@0x8426;
+  reg_scratch_pad_d_5_type scratch_pad_d_5@0x8427;
+  reg_scratch_pad_d_6_type scratch_pad_d_6@0x8428;
+  reg_scratch_pad_d_7_type scratch_pad_d_7@0x8429;
+  reg_scratch_pad_d_8_type scratch_pad_d_8@0x842a;
+  reg_scratch_pad_d_9_type scratch_pad_d_9@0x842b;
+  reg_scratch_pad_d_10_type scratch_pad_d_10@0x842c;
+  reg_scratch_pad_d_11_type scratch_pad_d_11@0x842d;
+  reg_scratch_pad_d_12_type scratch_pad_d_12@0x842e;
+  reg_scratch_pad_d_13_type scratch_pad_d_13@0x842f;
+  reg_scratch_pad_d_14_type scratch_pad_d_14@0x8430;
+  reg_scratch_pad_d_15_type scratch_pad_d_15@0x8431;
+};

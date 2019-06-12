@@ -1,0 +1,305 @@
+`include "lib_udp.rdl"
+
+addrmap map_PMU {
+
+    desc = "PMU";
+    Space = "PMU";
+    BaseAddress = "TBD";
+    reg reg_I2C_core_clock_type {
+        desc = "I2C core clock";
+        InitialProgramming = "";
+        regwidth  = 32;
+        accesswidth  = 8;
+        shared;
+        SOixSave           =  "no";
+        SpecialSaveRestore =  "";
+        RestoreOrder       =  "";
+        RestoreGroup       =  "default";
+        field {
+            desc = "Automatic clock gate control value";
+            AccessType = "rw";
+            ValRandomize = true;
+        } ACG_val_I2C [31:16] = 16'h0005;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved0 [15:12] = 4'h0;
+        field {
+            desc = "Clock division for oscillator";
+            AccessType = "rw";
+            ValRandomize = true;
+        } DIV_OSC_I2C [11:8] = 4'h14;
+        field {
+            desc = "Clock division for external clock and PLL";
+            AccessType = "rw";
+            ValRandomize = true;
+        } DIV_PLL_Extclk_I2C1 [7:4] = 4'h1;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved1 [3:3] = 1'h0;
+        field {
+            desc = "Mux select value to choose clock between oscillator and PLL ";
+            AccessType = "rw";
+            ValRandomize = true;
+        } OSC_PLL_clk_sel_I2C [2:2] = 1'h1;
+        field {
+            desc = "Mux select value to choose Real Time Clock ";
+            AccessType = "rw";
+            ValRandomize = true;
+        } RTC_clk_select_I2C1 [1:1] = 1'h1;
+        field {
+            desc = "Autonomous clock gate disable";
+            AccessType = "rw";
+            ValRandomize = true;
+        } ACG_Dis_I2C [0:0] = 1'h0;
+    }; // end register I2C_core_clock 
+    reg reg_SPI_core_clock_type {
+        desc = "SPI core clock";
+        InitialProgramming = "";
+        regwidth  = 32;
+        accesswidth  = 8;
+        shared;
+        SOixSave           =  "no";
+        SpecialSaveRestore =  "";
+        RestoreOrder       =  "";
+        RestoreGroup       =  "default";
+        field {
+            desc = "Automatic clock gate control value";
+            AccessType = "rw";
+            ValRandomize = true;
+        } ACG_val_SPI [31:16] = 16'h0005;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved0 [15:12] = 4'h0;
+        field {
+            desc = "Clock division for oscillator";
+            AccessType = "rw";
+            ValRandomize = true;
+        } DIV_OSC_SPI [11:8] = 4'h1;
+        field {
+            desc = "Clock division for external clock and PLL";
+            AccessType = "rw";
+            ValRandomize = true;
+        } DIV_PLL_Extclk_SPI [7:4] = 4'h1;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved1 [3:3] = 1'h0;
+        field {
+            desc = "Mux select value to choose clock between oscillator and PLL ";
+            AccessType = "rw";
+            ValRandomize = true;
+        } OSC_PLL_clk_sel_SPI [2:2] = 1'h1;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved2 [1:1] = 1'h0;
+        field {
+            desc = "Autonomous clock gate disable";
+            AccessType = "rw";
+            ValRandomize = true;
+        } ACG_Dis_SPI [0:0] = 1'h0;
+    }; // end register SPI_core_clock 
+    reg reg_I2S_core_clock_type {
+        desc = "I2S core clock";
+        InitialProgramming = "";
+        regwidth  = 32;
+        accesswidth  = 8;
+        shared;
+        SOixSave           =  "no";
+        SpecialSaveRestore =  "";
+        RestoreOrder       =  "";
+        RestoreGroup       =  "default";
+        field {
+            desc = "Automatic clock gate control value";
+            AccessType = "rw";
+            ValRandomize = true;
+        } ACG_val_I2S [31:16] = 16'h0005;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved0 [15:12] = 4'h0;
+        field {
+            desc = "Clock division for oscillator";
+            AccessType = "rw";
+            ValRandomize = true;
+        } DIV_OSC_I2S [11:8] = 4'h1;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved1 [7:1] = 7'h00;
+        field {
+            desc = "Autonomous clock gate disable";
+            AccessType = "rw";
+            ValRandomize = true;
+        } ACG_Dis_I2S [0:0] = 1'h0;
+    }; // end register I2S_core_clock 
+    reg reg_SS_BASE_CLK_type {
+        desc = "SS base clock";
+        InitialProgramming = "";
+        regwidth  = 32;
+        accesswidth  = 8;
+        shared;
+        SOixSave           =  "no";
+        SpecialSaveRestore =  "";
+        RestoreOrder       =  "";
+        RestoreGroup       =  "default";
+        field {
+            desc = "Automatic clock gate control value";
+            AccessType = "rw";
+            ValRandomize = true;
+        } ACG_val_SS [31:16] = 16'h0005;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved0 [15:12] = 4'h0;
+        field {
+            desc = "Clock division for oscillator";
+            AccessType = "rw";
+            ValRandomize = true;
+        } DIV_OSC_SS [11:8] = 4'h1;
+        field {
+            desc = "Clock division for external clock and PLL";
+            AccessType = "rw";
+            ValRandomize = true;
+        } DIV_PLL_Extclk_SS [7:4] = 4'h1;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved1 [3:3] = 1'h0;
+        field {
+            desc = "Mux select value to choose clock between oscillator and PLL ";
+            AccessType = "rw";
+            ValRandomize = true;
+        } OSC_PLL_clk_sel_SS [2:2] = 1'h1;
+        field {
+            desc = "Mux select value to choose Real Time Clock ";
+            AccessType = "rw";
+            ValRandomize = true;
+        } RTC_clk_select_SS [1:1] = 1'h1;
+        field {
+            desc = "Autonomous clock gate disable";
+            AccessType = "rw";
+            ValRandomize = true;
+        } ACG_Dis_SS [0:0] = 1'h0;
+    }; // end register SS_BASE_CLK 
+    reg reg_UART_core_clock_type {
+        desc = "UART core clock";
+        InitialProgramming = "";
+        regwidth  = 32;
+        accesswidth  = 8;
+        shared;
+        SOixSave           =  "no";
+        SpecialSaveRestore =  "";
+        RestoreOrder       =  "";
+        RestoreGroup       =  "default";
+        field {
+            desc = "Automatic clock gate control value";
+            AccessType = "rw";
+            ValRandomize = true;
+        } ACG_val_UART [31:16] = 16'h0005;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved0 [15:12] = 4'h0;
+        field {
+            desc = "Clock division for oscillator";
+            AccessType = "rw";
+            ValRandomize = true;
+        } DIV_OSC_UART [11:8] = 4'h1;
+        field {
+            desc = "Clock division for external clock and PLL";
+            AccessType = "rw";
+            ValRandomize = true;
+        } DIV_PLL_Extclk_UART [7:4] = 4'h1;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved1 [3:3] = 1'h0;
+        field {
+            desc = "Mux select value to choose clock between oscillator and PLL ";
+            AccessType = "rw";
+            ValRandomize = true;
+        } OSC_PLL_clk_sel_UART [2:2] = 1'h1;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved2 [1:1] = 1'h0;
+        field {
+            desc = "Autonomous clock gate disable";
+            AccessType = "rw";
+            ValRandomize = true;
+        } ACG_Dis_UART [0:0] = 1'h0;
+    }; // end register UART_core_clock 
+    reg reg_EMMC_core_clock_type {
+        desc = "EMMC core clock";
+        InitialProgramming = "";
+        regwidth  = 32;
+        accesswidth  = 8;
+        shared;
+        SOixSave           =  "no";
+        SpecialSaveRestore =  "";
+        RestoreOrder       =  "";
+        RestoreGroup       =  "default";
+        field {
+            desc = "Automatic clock gate control value";
+            AccessType = "rw";
+            ValRandomize = true;
+        } ACG_val_EMMC [31:16] = 16'h0005;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved0 [15:12] = 4'h0;
+        field {
+            desc = "Clock division for oscillator";
+            AccessType = "rw";
+            ValRandomize = true;
+        } DIV_OSC_EMMC [11:8] = 4'h1;
+        field {
+            desc = "Clock division for external clock and PLL";
+            AccessType = "rw";
+            ValRandomize = true;
+        } DIV_PLL_Extclk_EMMC [7:4] = 4'h1;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved1 [3:3] = 1'h0;
+        field {
+            desc = "Mux select value to choose clock between oscillator and PLL ";
+            AccessType = "rw";
+            ValRandomize = true;
+        } OSC_PLL_clk_sel_EMMC [2:2] = 1'h1;
+        field {
+            desc = "";
+            AccessType = "rw";
+            ValRandomize = true;
+        } Reserved2 [1:1] = 1'h0;
+        field {
+            desc = "Autonomous clock gate disable";
+            AccessType = "rw";
+            ValRandomize = true;
+        } ACG_Dis_EMMC [0:0] = 1'h0;
+    }; // end register EMMC_core_clock 
+        reg_I2C_core_clock_type I2C_core_clock@0x0;
+        reg_SPI_core_clock_type SPI_core_clock@0x4;
+        reg_I2S_core_clock_type I2S_core_clock@0x8;
+        reg_SS_BASE_CLK_type SS_BASE_CLK@0x10;
+        reg_UART_core_clock_type UART_core_clock@0x14;
+        reg_EMMC_core_clock_type EMMC_core_clock@0x18;
+};
