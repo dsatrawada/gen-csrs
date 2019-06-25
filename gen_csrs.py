@@ -186,3 +186,7 @@ help = store_arg(args.help, help)
 
 if (not len(sys.argv) > 1) or help:
     syntax()
+<<<<<<< HEAD
+=======
+print("conts")
+>>>>>>> 853b914b31a566c074b5a834835dba9b28586066
