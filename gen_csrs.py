@@ -1,26 +1,16 @@
+#!/usr/bin/env python3
+
 import argparse
-
-
-
-
-
+import xmltodict
+import string
 import sys
-
-#-----------------------------------------------------------------------------
-# store argument from command line
-#-----------------------------------------------------------------------------
-def store_arg(arg, var):
-    if arg != None:
-        return arg
-    else:
-        return var
 
 #-----------------------------------------------------------------------------
 # syntax
 #-----------------------------------------------------------------------------
 def syntax():
     print("\n    gen_csrs Rev " + version + ". Generation of Control/Status "
-         "verilog register file")
+          "verilog register file")
     print("    and documentation based on XML description")
     print("\n    Usage: gen_csrs.py [options] xml_filename")
     print("\n    Where options is any combination of the following (can be "
@@ -100,7 +90,39 @@ def syntax():
     print("\n           <mod> is extracted as the basename of the xml_filename "
           "if no provided")
     print("           (e.g. /path/timer_csrs.xml yields timer_csrs)\n")
-    sys.exit();
+    sys.exit()
+
+#-----------------------------------------------------------------------------
+# store argument from command line
+#-----------------------------------------------------------------------------
+def store_arg(arg, var):
+    if arg != None:
+        return arg
+    else:
+        return var
+
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+def given (dict, key):
+    if key in dict:
+        return key != ""
+    return False
+
+#-----------------------------------------------------------------------------
+# convert to decimal allowing for AB, 15, AA_BB type of inputs
+#-----------------------------------------------------------------------------
+def dec (value):
+    input = value.split("_")
+    x = ""
+    for item in input:
+        x += item
+    x = x.strip()
+    if('0x' in value):
+        return int(x[2:], 8)
+    if (all(c in set("ABCDEFabcdef") for c in x)):
+        sys.exit("ERROR: expected number, got " + value + " which appears hex "
+                 "but has no 0x prefix")
+    return int(x)
 
 version = "2.00"
 
@@ -125,7 +147,7 @@ vlogsep = "__"
 has_hidden = False
 hyperlinks = False
 warn_aw = True
-cq_delay = False
+cq_delay = 0
 rdata_on_decerr = "32'hbad00add"
 mod = ""
 allow_pstrobe = False
@@ -148,12 +170,12 @@ arguments = [
     "--parallel_mode", "--hyperlinks", "--warn_aw", "--gen_regs", "--gen_pkts",
     "--pstrb", "--help"
 ]
-[parser.add_argument(argument, action = "store_true", default = False) for argument in arguments]
+[parser.add_argument(argument, action = "store_true") for argument in arguments]
 arguments = [
     "--no_parallel_mode", "--no_hyperlinks", "--no_warn_aw", "--no_gen_regs",
     "--no_gen_pkts", "--no_pstrb", "--no_help"
 ]
-[parser.add_argument(argument, action = "store_false", default = False) for argument in arguments]
+[parser.add_argument(argument, action = "store_false") for argument in arguments]
 
 try:
     args = parser.parse_args()
@@ -186,3 +208,111 @@ help = store_arg(args.help, help)
 
 if (not len(sys.argv) > 1) or help:
     syntax()
+
+if mod == "":
+    mod = file_out.split(".")
+    mod = mod[0]
+
+MOD = mod.upper()
+
+if file_mmio_defines_h == None:
+    file_mmio_defines_h = mod + "_mmios.h"
+if file_host_defines_h == None:
+    file_host_defines_h = mod + "_host_defines.h"
+if file_host_defines_vh == None:
+    file_host_defines_vh = mod + "_host_defines.vh"
+if file_pkt_defines_h == None:
+    file_pkt_defines_h = mod + "_pkt_defines.h"
+if file_pe_defines_h == None:
+    file_pe_defines_h = mod + "_pe_defines.h"
+if file_html == None:
+    file_html = mod + ".html"
+
+NBASG = "<="
+if cq_delay > 0:
+    NBASG = "<= #" + cq_delay
+
+file_in = mod + ".xml"
+with open(file_in) as fd:
+    data_in = xmltodict.parse(fd.read())['REGISTERS']
+
+if not given(data_in['DEFAULTS'], '@CLOCK'):
+    data_in['DEFAULTS']['@CLOCK'] = "PCLK"
+if not given(data_in['DEFAULTS'], '@CLOCK_EDGE'):
+    data_in['DEFAULTS']['@CLOCK_EDGE'] = "posedge"
+if not given(data_in['DEFAULTS'], '@RESET'):
+    data_in['DEFAULTS']['@RESET'] = "PRESETN"
+if not given(data_in['DEFAULTS'], '@RESET_VAL'):
+    data_in['DEFAULTS']['@RESET_VAL'] = "0"
+if not given(data_in['DEFAULTS'], '@BASE'):
+    data_in['DEFAULTS']['@BASE'] = "0"
+if not given(data_in['DEFAULTS'], '@OFFS_INCR'):
+    data_in['DEFAULTS']['@OFFS_INCR'] = "4"
+if not given(data_in['DEFAULTS'], '@APB_ADDR_W'):
+    data_in['DEFAULTS']['@APB_ADDR_W'] = "32"
+if not given(data_in['DEFAULTS'], '@APB_ADDR_LSB'):
+    data_in['DEFAULTS']['@APB_ADDR_LSB'] = "0"
+if not given(data_in['DEFAULTS'], '@PREFIX_CSRS'):
+    data_in['DEFAULTS']['@PREFIX_CSRS'] = ""
+if not given(data_in['DEFAULTS'], '@PREFIX_PKTS'):
+    data_in['DEFAULTS']['@PREFIX_PKTS'] = ""
+if not given(data_in['DEFAULTS'], '@GEN_MMIO'):
+    data_in['DEFAULTS']['@GEN_MMIO'] = "0"
+if not given(data_in['DEFAULTS'], '@MMIO_STYLE_EXT'):
+    data_in['DEFAULTS']['@MMIO_STYLE_EXT'] = "1"
+if not given(data_in['DEFAULTS'], '@PREFIX_PORTS'):
+    data_in['DEFAULTS']['@PREFIX_PORTS'] = "1"
+if not given(data_in['DEFAULTS'], '@APB_V3'):
+    data_in['DEFAULTS']['@APB_V3'] = "0"
+if not given(data_in['DEFAULTS'], '@MMIO_EXT_ADDR_W'):
+    data_in['DEFAULTS']['@MMIO_EXT_ADDR_W'] = "16"
+if not given(data_in['DEFAULTS'], '@REG_FLD_SEP'):
+    data_in['DEFAULTS']['@REG_FLD_SEP'] = sep
+if not given(data_in['DEFAULTS'], '@REG_FLD_VLOGSEP'):
+    data_in['DEFAULTS']['@REG_FLD_VLOGSEP'] = vlogsep
+
+clock             = data_in['DEFAULTS']['@CLOCK']
+clock_edge        = data_in['DEFAULTS']['@CLOCK_EDGE']
+reset             = data_in['DEFAULTS']['@RESET']
+reset_val         = data_in['DEFAULTS']['@RESET_VAL']
+base              = dec(data_in['DEFAULTS']['@BASE'])
+offs_incr         = dec(data_in['DEFAULTS']['@OFFS_INCR'])
+prefix_csrs       = data_in['DEFAULTS']['@PREFIX_CSRS']
+prefix_pkts       = data_in['DEFAULTS']['@PREFIX_PKTS']
+gen_mmio          = int(data_in['DEFAULTS']['@GEN_MMIO']) + 0
+mmio_style_ext    = int(data_in['DEFAULTS']['@MMIO_STYLE_EXT']) + 0
+prefix_ports      = int(data_in['DEFAULTS']['@PREFIX_PORTS']) + 0
+apb_v3            = int(data_in['DEFAULTS']['@APB_V3']) + 0
+mmio_ext_addr_msb = int(data_in['DEFAULTS']['@MMIO_EXT_ADDR_W']) - 1
+mmio_ext_addr_sz  = int(mmio_ext_addr_msb) + 1
+mmio_offs_incr    = (data_in['DEFAULTS']['@MMIO_OFFS_INCR']
+                    if given(data_in['DEFAULTS'], '@MMIO_OFFS_INCR')
+                    else 0x4 if mmio_style_ext else 1)
+sep     = data_in['DEFAULTS']['@REG_FLD_SEP']
+vlogsep = data_in['DEFAULTS']['@REG_FLD_VLOGSEP']
+
+tick = {}
+tick['c'] = "#"
+tick['v'] = "`"
+hw = None
+hr = None
+rst = None
+ff = None
+mmi = None
+mmi_decl = None
+mmi_ports = None
+mmo = None
+mmo_decl = None
+mmo_ports = None
+mmio_defines = None
+host_defines = None
+pe_defines = None
+reg_list_macro = None
+field_list_macro = None
+ff_cnt = 32 #for PRDATA
+apb_addr_msb = dec(data_in['DEFAULTS']['@APB_ADDR_W']) - 1
+apb_addr_size = apb_addr_msb + 1
+g_input_list = None
+g_input_g2p_list = None
+g_output_list = None
+g_output_g2p_list = None
